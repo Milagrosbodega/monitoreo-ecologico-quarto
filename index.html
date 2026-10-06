@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Milagros Bodega">
+
+<title>Monitoreo Ecológico y Calidad de Agua en Lagunas</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="index_files/libs/clipboard/clipboard.min.js"></script>
+<script src="index_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="index_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="index_files/libs/quarto-html/popper.min.js"></script>
+<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="index_files/libs/quarto-html/anchor.min.js"></script>
+<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="index_files/libs/bootstrap/bootstrap-e34e999c5ec40446cda825c9d876ac62.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="index_files/libs/bootstrap/bootstrap-dark-e34e999c5ec40446cda825c9d876ac62.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="index_files/libs/bootstrap/bootstrap-e34e999c5ec40446cda825c9d876ac62.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="index_files/libs/quarto-dashboard/quarto-dashboard.js"></script>
+<script src="index_files/libs/quarto-dashboard/stickythead.js"></script>
+
+
+
+<script src="index_files/libs/quarto-dashboard/web-components.js" type="module"></script>
+<script src="index_files/libs/quarto-dashboard/components.js"></script>
+
+<link href="index_files/libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="index_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="index_files/libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="index_files/libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="index_files/libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="index_files/libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="index_files/libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="index_files/libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="index_files/libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="index_files/libs/leaflet-binding-2.2.3/leaflet.js"></script>
+<script src="index_files/libs/leaflet-providers-3.0.0/leaflet-providers.js"></script>
+<script src="index_files/libs/leaflet-providers-plugin-2.2.3/leaflet-providers-plugin.js"></script>
+<script src="index_files/libs/plotly-binding-4.12.1/plotly.js"></script>
+<script src="index_files/libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="index_files/libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="index_files/libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+<link href="index_files/libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="index_files/libs/plotly-main-2.25.2/plotly-latest.min.js"></script>
+<link href="index_files/libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="index_files/libs/datatables-binding-0.34.0/datatables.js"></script>
+<link href="index_files/libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="index_files/libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="index_files/libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+
+
+</head>
+
+<body class="quarto-dashboard dashboard-fill fullcontent quarto-light">
+
+<header id="quarto-dashboard-header">
+<nav class="navbar navbar-expand-md slim" data-bs-theme="dark">
+  <div class="navbar-container container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-controls="dashboard-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>    
+
+
+    <div class="navbar-brand-container">       
+
+      <div class="navbar-title">
+        <div class="navbar-title-text"><a href="#">Monitoreo Ecológico y Calidad de Agua en Lagunas</a></div>
+        
+        <div class="navbar-author">Milagros Bodega</div>
+      </div>
+    </div>
+<div id="dashboard-collapse" class="navbar-collapse collapse"><ul class="navbar-nav navbar-nav-scroll me-auto" role="tablist"><li class="nav-item" role="presentation"><a id="tab-monitoreo-mensual" class="nav-link active" data-bs-toggle="tab" role="tab" data-bs-target="#monitoreo-mensual" data-scrolling="false" href="#monitoreo-mensual" aria-controls="monitoreo-mensual" aria-selected="true"><span class="nav-link-text">Monitoreo Mensual</span></a></li><li class="nav-item" role="presentation"><a id="tab-tendencia-histórica" class="nav-link" data-bs-toggle="tab" role="tab" data-bs-target="#tendencia-histórica" data-scrolling="false" href="#tendencia-histórica" aria-controls="tendencia-histórica" aria-selected="false"><span class="nav-link-text">Tendencia Histórica</span></a></li><li class="nav-item" role="presentation"><a id="tab-bioindicadores" class="nav-link" data-bs-toggle="tab" role="tab" data-bs-target="#bioindicadores" data-scrolling="false" href="#bioindicadores" aria-controls="bioindicadores" aria-selected="false"><span class="nav-link-text">Bioindicadores</span></a></li></ul><div class="quarto-dashboard-links"><a class="quarto-dashboard-link" href="https://github.com/Milagrosbodega/monitoreo-ecologico-quarto/" title="GitHub"><i class="bi bi-github"></i></a></div></div></div>
+</nav>
+</header>
+<div class="page-layout-custom quarto-dashboard-content bslib-gap-spacing html-fill-container bslib-page-fill quarto-dashboard-pages">  
+
+<div class="bslib-grid-item html-fill-item tab-content bslib-grid" data-layout="fill" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div id="monitoreo-mensual" class="dashboard-page tab-pane show active html-fill-item html-fill-container" data-orientation="rows" aria-labelledby="tab-monitoreo-mensual">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, 20fr) minmax(3em, 50fr) minmax(3em, 30fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr) minmax(3em, 1fr) minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card valuebox cell html-fill-item html-fill-container bslib-card bslib-value-box bg-primary showcase-left-center" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div data-icon="water" class="html-fill-item html-fill-container value-box-grid">
+<div class="value-box-showcase html-fill-item html-fill-container">
+
+<i class="bi bi-water"></i></div>
+<div class="value-box-area">
+<p class="value-box-title">
+Lagunas Monitoreadas
+</p>
+<p class="value-box-value">
+4
+</p>
+</div>
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div><div class="card valuebox cell html-fill-item html-fill-container bslib-card bslib-value-box bg-info showcase-left-center" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div data-icon="calendar2-check" class="html-fill-item html-fill-container value-box-grid">
+<div class="value-box-showcase html-fill-item html-fill-container">
+
+<i class="bi bi-calendar2-check"></i></div>
+<div class="value-box-area">
+<p class="value-box-title">
+Campañas de Muestreo
+</p>
+<p class="value-box-value">
+7
+</p>
+</div>
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div><div class="card valuebox cell html-fill-item html-fill-container bslib-card bslib-value-box bg-success showcase-left-center" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div data-icon="bug" class="html-fill-item html-fill-container value-box-grid">
+<div class="value-box-showcase html-fill-item html-fill-container">
+
+<i class="bi bi-bug"></i></div>
+<div class="value-box-area">
+<p class="value-box-title">
+Total Macroinvertebrados
+</p>
+<p class="value-box-value">
+11728
+</p>
+</div>
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 40fr) minmax(3em, 60fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-title="Ubicación de Lagunas (Les Madrigueres)" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-header"><div class="card-title"><span style="display: inline">
+Ubicación de Lagunas (Les Madrigueres)
+</span></div></div>
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<div class="leaflet html-widget html-fill-item html-fill-container" id="htmlwidget-2d4a831de736ebdf1c12" style="width:100%;height:406px;"></div>
+<script type="application/json" data-for="htmlwidget-2d4a831de736ebdf1c12">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["Esri.WorldImagery",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["CartoDB.PositronOnlyLabels",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircleMarkers","args":[[41.184,41.185,41.185,41.184],[1.553,1.549,1.552,1.55],9,null,null,{"interactive":true,"className":"","stroke":true,"color":"#ffffff","weight":2,"opacity":0.5,"fill":true,"fillColor":"#e7298a","fillOpacity":0.9},null,null,["<b>Chara<\/b>","<b>Fartet<\/b>","<b>Nueva<\/b>","<b>Salada<\/b>"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[41.184,41.185],"lng":[1.549,1.553]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div><div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-title="Evolución Temporal de Parámetros Fisicoquímicos" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-header"><div class="card-title"><span style="display: inline">
+Evolución Temporal de Parámetros Fisicoquímicos
+</span></div></div>
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<div class="plotly html-widget html-fill-item html-fill-container" id="htmlwidget-e27ccab98f3a5c3ebd42" style="width:100%;height:406px;"></div>
+<script type="application/json" data-for="htmlwidget-e27ccab98f3a5c3ebd42">{"x":{"visdat":{"24fa1a4db228":["function () ","plotlyVisDat"],"24fa62eb6d95":["function () ","data"],"24fa4e6783ef":["function () ","data"],"24fa6e06e81f":["function () ","data"],"24fa77183a8":["function () ","data"],"24fa2d7a8e69":["function () ","data"],"24fa491ba6d2":["function () ","data"],"24fa36654a7d":["function () ","data"],"24fa33fd7071":["function () ","data"],"24fa43e12561":["function () ","data"],"24fa725d2617":["function () ","data"],"24fa416feaa9":["function () ","data"],"24fa1a971ecf":["function () ","data"],"24fa3767b5ac":["function () ","data"],"24fa79c84b9e":["function () ","data"],"24fa4cdcb088":["function () ","data"],"24fa2cc9d824":["function () ","data"],"24fa778d3a74":["function () ","data"],"24fa58f8d2fd":["function () ","data"],"24fa37e40dad":["function () ","data"],"24fa5d3df585":["function () ","data"],"24faec21e96":["function () ","data"],"24fa6a66116b":["function () ","data"],"24fa5301be5f":["function () ","data"],"24fa1779798c":["function () ","data"],"24fa281ae25e":["function () ","data"],"24fa7d039de3":["function () ","data"],"24fa7872e233":["function () ","data"],"24fa3e60c00c":["function () ","data"],"24fa41e073d2":["function () ","data"],"24fa76d401c7":["function () ","data"],"24fa58c0ecc3":["function () ","data"],"24fa61f823ba":["function () ","data"]},"cur_data":"24fa61f823ba","attrs":{"24fa62eb6d95":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"name":"Chara","type":"scatter","mode":"lines+markers","line":{"color":"#1b9e77","width":2.5},"marker":{"color":"#1b9e77","size":8},"visible":true,"legendgroup":"Chara","showlegend":true,"hovertemplate":"<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","inherit":true},"24fa4e6783ef":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"name":"Fartet","type":"scatter","mode":"lines+markers","line":{"color":"#d95f02","width":2.5},"marker":{"color":"#d95f02","size":8},"visible":true,"legendgroup":"Fartet","showlegend":true,"hovertemplate":"<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","inherit":true},"24fa6e06e81f":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"name":"Nueva","type":"scatter","mode":"lines+markers","line":{"color":"#7570b3","width":2.5},"marker":{"color":"#7570b3","size":8},"visible":true,"legendgroup":"Nueva","showlegend":true,"hovertemplate":"<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","inherit":true},"24fa77183a8":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"name":"Salada","type":"scatter","mode":"lines+markers","line":{"color":"#e7298a","width":2.5},"marker":{"color":"#e7298a","size":8},"visible":true,"legendgroup":"Salada","showlegend":true,"hovertemplate":"<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","inherit":true},"24fa2d7a8e69":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"name":"Chara","type":"scatter","mode":"lines+markers","line":{"color":"#1b9e77","width":2.5},"marker":{"color":"#1b9e77","size":8},"visible":false,"legendgroup":"Chara","showlegend":false,"hovertemplate":"<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","inherit":true},"24fa491ba6d2":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"name":"Fartet","type":"scatter","mode":"lines+markers","line":{"color":"#d95f02","width":2.5},"marker":{"color":"#d95f02","size":8},"visible":false,"legendgroup":"Fartet","showlegend":false,"hovertemplate":"<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","inherit":true},"24fa36654a7d":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"name":"Nueva","type":"scatter","mode":"lines+markers","line":{"color":"#7570b3","width":2.5},"marker":{"color":"#7570b3","size":8},"visible":false,"legendgroup":"Nueva","showlegend":false,"hovertemplate":"<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","inherit":true},"24fa33fd7071":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"name":"Salada","type":"scatter","mode":"lines+markers","line":{"color":"#e7298a","width":2.5},"marker":{"color":"#e7298a","size":8},"visible":false,"legendgroup":"Salada","showlegend":false,"hovertemplate":"<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","inherit":true},"24fa43e12561":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"name":"Chara","type":"scatter","mode":"lines+markers","line":{"color":"#1b9e77","width":2.5},"marker":{"color":"#1b9e77","size":8},"visible":false,"legendgroup":"Chara","showlegend":false,"hovertemplate":"<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","inherit":true},"24fa725d2617":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"name":"Fartet","type":"scatter","mode":"lines+markers","line":{"color":"#d95f02","width":2.5},"marker":{"color":"#d95f02","size":8},"visible":false,"legendgroup":"Fartet","showlegend":false,"hovertemplate":"<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","inherit":true},"24fa416feaa9":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"name":"Nueva","type":"scatter","mode":"lines+markers","line":{"color":"#7570b3","width":2.5},"marker":{"color":"#7570b3","size":8},"visible":false,"legendgroup":"Nueva","showlegend":false,"hovertemplate":"<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","inherit":true},"24fa1a971ecf":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"name":"Salada","type":"scatter","mode":"lines+markers","line":{"color":"#e7298a","width":2.5},"marker":{"color":"#e7298a","size":8},"visible":false,"legendgroup":"Salada","showlegend":false,"hovertemplate":"<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","inherit":true},"24fa3767b5ac":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"name":"Chara","type":"scatter","mode":"lines+markers","line":{"color":"#1b9e77","width":2.5},"marker":{"color":"#1b9e77","size":8},"visible":false,"legendgroup":"Chara","showlegend":false,"hovertemplate":"<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","inherit":true},"24fa79c84b9e":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"name":"Fartet","type":"scatter","mode":"lines+markers","line":{"color":"#d95f02","width":2.5},"marker":{"color":"#d95f02","size":8},"visible":false,"legendgroup":"Fartet","showlegend":false,"hovertemplate":"<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","inherit":true},"24fa4cdcb088":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"name":"Nueva","type":"scatter","mode":"lines+markers","line":{"color":"#7570b3","width":2.5},"marker":{"color":"#7570b3","size":8},"visible":false,"legendgroup":"Nueva","showlegend":false,"hovertemplate":"<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","inherit":true},"24fa2cc9d824":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"name":"Salada","type":"scatter","mode":"lines+markers","line":{"color":"#e7298a","width":2.5},"marker":{"color":"#e7298a","size":8},"visible":false,"legendgroup":"Salada","showlegend":false,"hovertemplate":"<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","inherit":true},"24fa778d3a74":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"name":"Chara","type":"scatter","mode":"lines+markers","line":{"color":"#1b9e77","width":2.5},"marker":{"color":"#1b9e77","size":8},"visible":false,"legendgroup":"Chara","showlegend":false,"hovertemplate":"<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","inherit":true},"24fa58f8d2fd":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"name":"Fartet","type":"scatter","mode":"lines+markers","line":{"color":"#d95f02","width":2.5},"marker":{"color":"#d95f02","size":8},"visible":false,"legendgroup":"Fartet","showlegend":false,"hovertemplate":"<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","inherit":true},"24fa37e40dad":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"name":"Nueva","type":"scatter","mode":"lines+markers","line":{"color":"#7570b3","width":2.5},"marker":{"color":"#7570b3","size":8},"visible":false,"legendgroup":"Nueva","showlegend":false,"hovertemplate":"<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","inherit":true},"24fa5d3df585":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"name":"Salada","type":"scatter","mode":"lines+markers","line":{"color":"#e7298a","width":2.5},"marker":{"color":"#e7298a","size":8},"visible":false,"legendgroup":"Salada","showlegend":false,"hovertemplate":"<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","inherit":true},"24faec21e96":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"name":"Chara","type":"scatter","mode":"lines+markers","line":{"color":"#1b9e77","width":2.5},"marker":{"color":"#1b9e77","size":8},"visible":false,"legendgroup":"Chara","showlegend":false,"hovertemplate":"<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","inherit":true},"24fa6a66116b":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"name":"Fartet","type":"scatter","mode":"lines+markers","line":{"color":"#d95f02","width":2.5},"marker":{"color":"#d95f02","size":8},"visible":false,"legendgroup":"Fartet","showlegend":false,"hovertemplate":"<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","inherit":true},"24fa5301be5f":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"name":"Nueva","type":"scatter","mode":"lines+markers","line":{"color":"#7570b3","width":2.5},"marker":{"color":"#7570b3","size":8},"visible":false,"legendgroup":"Nueva","showlegend":false,"hovertemplate":"<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","inherit":true},"24fa1779798c":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"name":"Salada","type":"scatter","mode":"lines+markers","line":{"color":"#e7298a","width":2.5},"marker":{"color":"#e7298a","size":8},"visible":false,"legendgroup":"Salada","showlegend":false,"hovertemplate":"<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","inherit":true},"24fa281ae25e":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"name":"Chara","type":"scatter","mode":"lines+markers","line":{"color":"#1b9e77","width":2.5},"marker":{"color":"#1b9e77","size":8},"visible":false,"legendgroup":"Chara","showlegend":false,"hovertemplate":"<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","inherit":true},"24fa7d039de3":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"name":"Fartet","type":"scatter","mode":"lines+markers","line":{"color":"#d95f02","width":2.5},"marker":{"color":"#d95f02","size":8},"visible":false,"legendgroup":"Fartet","showlegend":false,"hovertemplate":"<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","inherit":true},"24fa7872e233":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"name":"Nueva","type":"scatter","mode":"lines+markers","line":{"color":"#7570b3","width":2.5},"marker":{"color":"#7570b3","size":8},"visible":false,"legendgroup":"Nueva","showlegend":false,"hovertemplate":"<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","inherit":true},"24fa3e60c00c":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"name":"Salada","type":"scatter","mode":"lines+markers","line":{"color":"#e7298a","width":2.5},"marker":{"color":"#e7298a","size":8},"visible":false,"legendgroup":"Salada","showlegend":false,"hovertemplate":"<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","inherit":true},"24fa41e073d2":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"name":"Chara","type":"scatter","mode":"lines+markers","line":{"color":"#1b9e77","width":2.5},"marker":{"color":"#1b9e77","size":8},"visible":false,"legendgroup":"Chara","showlegend":false,"hovertemplate":"<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","inherit":true},"24fa76d401c7":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"name":"Fartet","type":"scatter","mode":"lines+markers","line":{"color":"#d95f02","width":2.5},"marker":{"color":"#d95f02","size":8},"visible":false,"legendgroup":"Fartet","showlegend":false,"hovertemplate":"<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","inherit":true},"24fa58c0ecc3":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"name":"Nueva","type":"scatter","mode":"lines+markers","line":{"color":"#7570b3","width":2.5},"marker":{"color":"#7570b3","size":8},"visible":false,"legendgroup":"Nueva","showlegend":false,"hovertemplate":"<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","inherit":true},"24fa61f823ba":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"name":"Salada","type":"scatter","mode":"lines+markers","line":{"color":"#e7298a","width":2.5},"marker":{"color":"#e7298a","size":8},"visible":false,"legendgroup":"Salada","showlegend":false,"hovertemplate":"<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"Mes de Muestreo","tickvals":["2025-11-15","2025-12-15","2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15"],"tickformat":"%b %Y"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Temperatura del Agua (°C)"},"updatemenus":[{"y":1.1499999999999999,"x":0,"xanchor":"left","yanchor":"top","buttons":[{"method":"update","args":[{"visible":[true,true,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false]},{"yaxis":{"title":"Temperatura del Agua (°C)"}}],"label":"Temperatura del Agua (°C)"},{"method":"update","args":[{"visible":[false,false,false,false,true,true,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false]},{"yaxis":{"title":"Oxígeno Disuelto (%)"}}],"label":"Oxígeno Disuelto (%)"},{"method":"update","args":[{"visible":[false,false,false,false,false,false,false,false,true,true,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false]},{"yaxis":{"title":"Conductividad Eléctrica (mS/cm)"}}],"label":"Conductividad Eléctrica (mS/cm)"},{"method":"update","args":[{"visible":[false,false,false,false,false,false,false,false,false,false,false,false,true,true,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false]},{"yaxis":{"title":"pH"}}],"label":"pH"},{"method":"update","args":[{"visible":[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true,true,true,false,false,false,false,false,false,false,false,false,false,false,false]},{"yaxis":{"title":"Alcalinidad (meq/L)"}}],"label":"Alcalinidad (meq/L)"},{"method":"update","args":[{"visible":[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true,true,true,false,false,false,false,false,false,false,false]},{"yaxis":{"title":"Clorofila-a (µg/L)"}}],"label":"Clorofila-a (µg/L)"},{"method":"update","args":[{"visible":[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true,true,true,false,false,false,false]},{"yaxis":{"title":"DIN (mg/L)"}}],"label":"DIN (mg/L)"},{"method":"update","args":[{"visible":[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true,true,true]},{"yaxis":{"title":"SRP (mg/L)"}}],"label":"SRP (mg/L)"}],"direction":"down","showactive":true}],"hovermode":"closest","legend":{"orientation":"h","x":0.20000000000000001,"y":-0.20000000000000001},"showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["2025-11-15","2025-12-15","2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15"],"y":[10.4,12.5,10.699999999999999,17.199999999999999,17.800000000000001,17.100000000000001,17.600000000000001],"name":"Chara","type":"scatter","mode":"lines+markers","line":{"color":"#1b9e77","width":2.5},"marker":{"color":"#1b9e77","size":8,"line":{"color":"rgba(31,119,180,1)"}},"visible":true,"legendgroup":"Chara","showlegend":true,"hovertemplate":["<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>"],"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2025-12-15","2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15"],"y":[10.199999999999999,9.5999999999999996,13.07,13.199999999999999,17.100000000000001,17.699999999999999],"name":"Fartet","type":"scatter","mode":"lines+markers","line":{"color":"#d95f02","width":2.5},"marker":{"color":"#d95f02","size":8,"line":{"color":"rgba(255,127,14,1)"}},"visible":true,"legendgroup":"Fartet","showlegend":true,"hovertemplate":["<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>"],"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2025-11-15","2025-12-15","2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15"],"y":[8.5999999999999996,11.4,15.699999999999999,15.699999999999999,14.699999999999999,18.699999999999999,19],"name":"Nueva","type":"scatter","mode":"lines+markers","line":{"color":"#7570b3","width":2.5},"marker":{"color":"#7570b3","size":8,"line":{"color":"rgba(44,160,44,1)"}},"visible":true,"legendgroup":"Nueva","showlegend":true,"hovertemplate":["<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>"],"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2025-11-15","2025-12-15","2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15"],"y":[8.6999999999999993,11.5,9,13.6,13.9,19.899999999999999,20],"name":"Salada","type":"scatter","mode":"lines+markers","line":{"color":"#e7298a","width":2.5},"marker":{"color":"#e7298a","size":8,"line":{"color":"rgba(214,39,40,1)"}},"visible":true,"legendgroup":"Salada","showlegend":true,"hovertemplate":["<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>"],"error_y":{"color":"rgba(214,39,40,1)"},"error_x":{"color":"rgba(214,39,40,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2025-11-15","2025-12-15","2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15"],"y":[45.600000000000001,47.399999999999999,53.100000000000001,50.299999999999997,54.299999999999997,160.80000000000001,82.099999999999994],"name":"Chara","type":"scatter","mode":"lines+markers","line":{"color":"#1b9e77","width":2.5},"marker":{"color":"#1b9e77","size":8,"line":{"color":"rgba(148,103,189,1)"}},"visible":false,"legendgroup":"Chara","showlegend":false,"hovertemplate":["<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>"],"error_y":{"color":"rgba(148,103,189,1)"},"error_x":{"color":"rgba(148,103,189,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2025-12-15","2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15"],"y":[18.5,30.100000000000001,48.200000000000003,36.899999999999999,36.600000000000001,75.200000000000003],"name":"Fartet","type":"scatter","mode":"lines+markers","line":{"color":"#d95f02","width":2.5},"marker":{"color":"#d95f02","size":8,"line":{"color":"rgba(140,86,75,1)"}},"visible":false,"legendgroup":"Fartet","showlegend":false,"hovertemplate":["<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>"],"error_y":{"color":"rgba(140,86,75,1)"},"error_x":{"color":"rgba(140,86,75,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2025-11-15","2025-12-15","2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15"],"y":[122.40000000000001,121.2,124.2,124.2,133,119.3,172.09999999999999],"name":"Nueva","type":"scatter","mode":"lines+markers","line":{"color":"#7570b3","width":2.5},"marker":{"color":"#7570b3","size":8,"line":{"color":"rgba(227,119,194,1)"}},"visible":false,"legendgroup":"Nueva","showlegend":false,"hovertemplate":["<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>"],"error_y":{"color":"rgba(227,119,194,1)"},"error_x":{"color":"rgba(227,119,194,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2025-11-15","2025-12-15","2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15"],"y":[90.700000000000003,57.5,96.400000000000006,180.69999999999999,86.299999999999997,80.099999999999994,130.30000000000001],"name":"Salada","type":"scatter","mode":"lines+markers","line":{"color":"#e7298a","width":2.5},"marker":{"color":"#e7298a","size":8,"line":{"color":"rgba(127,127,127,1)"}},"visible":false,"legendgroup":"Salada","showlegend":false,"hovertemplate":["<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>"],"error_y":{"color":"rgba(127,127,127,1)"},"error_x":{"color":"rgba(127,127,127,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2025-11-15","2025-12-15","2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15"],"y":[1.1299999999999999,1.3899999999999999,1.97,3.1400000000000001,3.0800000000000001,5.9199999999999999,4.8200000000000003],"name":"Chara","type":"scatter","mode":"lines+markers","line":{"color":"#1b9e77","width":2.5},"marker":{"color":"#1b9e77","size":8,"line":{"color":"rgba(188,189,34,1)"}},"visible":false,"legendgroup":"Chara","showlegend":false,"hovertemplate":["<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>"],"error_y":{"color":"rgba(188,189,34,1)"},"error_x":{"color":"rgba(188,189,34,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2025-12-15","2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15"],"y":[6.8300000000000001,4.7699999999999996,5.0099999999999998,4.8600000000000003,7.6799999999999997,6.0800000000000001],"name":"Fartet","type":"scatter","mode":"lines+markers","line":{"color":"#d95f02","width":2.5},"marker":{"color":"#d95f02","size":8,"line":{"color":"rgba(23,190,207,1)"}},"visible":false,"legendgroup":"Fartet","showlegend":false,"hovertemplate":["<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>"],"error_y":{"color":"rgba(23,190,207,1)"},"error_x":{"color":"rgba(23,190,207,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2025-11-15","2025-12-15","2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15"],"y":[5.8200000000000003,5.8200000000000003,4.3499999999999996,4.3499999999999996,3.96,7.3399999999999999,6.9199999999999999],"name":"Nueva","type":"scatter","mode":"lines+markers","line":{"color":"#7570b3","width":2.5},"marker":{"color":"#7570b3","size":8,"line":{"color":"rgba(31,119,180,1)"}},"visible":false,"legendgroup":"Nueva","showlegend":false,"hovertemplate":["<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>"],"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2025-11-15","2025-12-15","2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15"],"y":[11.699999999999999,11.56,12.779999999999999,8.6600000000000001,8.6199999999999992,13.800000000000001,10.359999999999999],"name":"Salada","type":"scatter","mode":"lines+markers","line":{"color":"#e7298a","width":2.5},"marker":{"color":"#e7298a","size":8,"line":{"color":"rgba(255,127,14,1)"}},"visible":false,"legendgroup":"Salada","showlegend":false,"hovertemplate":["<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>"],"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2025-11-15","2025-12-15","2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15"],"y":[8.4399999999999995,8.6500000000000004,8.1899999999999995,8.5999999999999996,9.0800000000000001,7.5,8.4399999999999995],"name":"Chara","type":"scatter","mode":"lines+markers","line":{"color":"#1b9e77","width":2.5},"marker":{"color":"#1b9e77","size":8,"line":{"color":"rgba(44,160,44,1)"}},"visible":false,"legendgroup":"Chara","showlegend":false,"hovertemplate":["<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>"],"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2025-12-15","2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15"],"y":[8.0500000000000007,8.2100000000000009,8.6899999999999995,8.8499999999999996,7.9000000000000004,8.4900000000000002],"name":"Fartet","type":"scatter","mode":"lines+markers","line":{"color":"#d95f02","width":2.5},"marker":{"color":"#d95f02","size":8,"line":{"color":"rgba(214,39,40,1)"}},"visible":false,"legendgroup":"Fartet","showlegend":false,"hovertemplate":["<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>"],"error_y":{"color":"rgba(214,39,40,1)"},"error_x":{"color":"rgba(214,39,40,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2025-11-15","2025-12-15","2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15"],"y":[8.6999999999999993,8.2100000000000009,9.3599999999999994,9.3599999999999994,9.3900000000000006,10.199999999999999,8.3499999999999996],"name":"Nueva","type":"scatter","mode":"lines+markers","line":{"color":"#7570b3","width":2.5},"marker":{"color":"#7570b3","size":8,"line":{"color":"rgba(148,103,189,1)"}},"visible":false,"legendgroup":"Nueva","showlegend":false,"hovertemplate":["<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>"],"error_y":{"color":"rgba(148,103,189,1)"},"error_x":{"color":"rgba(148,103,189,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2025-11-15","2025-12-15","2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15"],"y":[8.6400000000000006,7.1900000000000004,7.9800000000000004,9.2899999999999991,9.0899999999999999,9.1300000000000008,8.5099999999999998],"name":"Salada","type":"scatter","mode":"lines+markers","line":{"color":"#e7298a","width":2.5},"marker":{"color":"#e7298a","size":8,"line":{"color":"rgba(140,86,75,1)"}},"visible":false,"legendgroup":"Salada","showlegend":false,"hovertemplate":["<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>"],"error_y":{"color":"rgba(140,86,75,1)"},"error_x":{"color":"rgba(140,86,75,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15"],"y":[16.035,17.547000000000001,8.593,6.3799999999999999,8.2729999999999997],"name":"Chara","type":"scatter","mode":"lines+markers","line":{"color":"#1b9e77","width":2.5},"marker":{"color":"#1b9e77","size":8,"line":{"color":"rgba(227,119,194,1)"}},"visible":false,"legendgroup":"Chara","showlegend":false,"hovertemplate":["<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>"],"error_y":{"color":"rgba(227,119,194,1)"},"error_x":{"color":"rgba(227,119,194,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15"],"y":[24.163,25.763999999999999,11.491,8.8100000000000005,13.093999999999999],"name":"Fartet","type":"scatter","mode":"lines+markers","line":{"color":"#d95f02","width":2.5},"marker":{"color":"#d95f02","size":8,"line":{"color":"rgba(127,127,127,1)"}},"visible":false,"legendgroup":"Fartet","showlegend":false,"hovertemplate":["<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>"],"error_y":{"color":"rgba(127,127,127,1)"},"error_x":{"color":"rgba(127,127,127,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15"],"y":[7.399,4.3929999999999998,2.0649999999999999,1.29,3.125],"name":"Nueva","type":"scatter","mode":"lines+markers","line":{"color":"#7570b3","width":2.5},"marker":{"color":"#7570b3","size":8,"line":{"color":"rgba(188,189,34,1)"}},"visible":false,"legendgroup":"Nueva","showlegend":false,"hovertemplate":["<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>"],"error_y":{"color":"rgba(188,189,34,1)"},"error_x":{"color":"rgba(188,189,34,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15"],"y":[18.285,13.816000000000001,13.179,4.3799999999999999,5.1929999999999996],"name":"Salada","type":"scatter","mode":"lines+markers","line":{"color":"#e7298a","width":2.5},"marker":{"color":"#e7298a","size":8,"line":{"color":"rgba(23,190,207,1)"}},"visible":false,"legendgroup":"Salada","showlegend":false,"hovertemplate":["<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>"],"error_y":{"color":"rgba(23,190,207,1)"},"error_x":{"color":"rgba(23,190,207,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2025-11-15","2025-12-15","2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15"],"y":[0.0070000000000000001,0.0040000000000000001,0.002,0.157,0,0.0043,0],"name":"Chara","type":"scatter","mode":"lines+markers","line":{"color":"#1b9e77","width":2.5},"marker":{"color":"#1b9e77","size":8,"line":{"color":"rgba(31,119,180,1)"}},"visible":false,"legendgroup":"Chara","showlegend":false,"hovertemplate":["<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>"],"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2025-12-15","2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15"],"y":[0.0040000000000000001,0.001,0.071999999999999995,0,0.041000000000000002,0.001],"name":"Fartet","type":"scatter","mode":"lines+markers","line":{"color":"#d95f02","width":2.5},"marker":{"color":"#d95f02","size":8,"line":{"color":"rgba(255,127,14,1)"}},"visible":false,"legendgroup":"Fartet","showlegend":false,"hovertemplate":["<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>"],"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2025-11-15","2025-12-15","2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15"],"y":[0.002,0.0040000000000000001,0.0030000000000000001,0.057000000000000002,0.00040000000000000002,0.001,0.01],"name":"Nueva","type":"scatter","mode":"lines+markers","line":{"color":"#7570b3","width":2.5},"marker":{"color":"#7570b3","size":8,"line":{"color":"rgba(44,160,44,1)"}},"visible":false,"legendgroup":"Nueva","showlegend":false,"hovertemplate":["<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>"],"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2025-11-15","2025-12-15","2026-01-15","2026-02-15",null,"2026-04-15","2026-05-15"],"y":[0.025000000000000001,0.0070000000000000001,0.0070000000000000001,1.6870000000000001,null,0.0094999999999999998,0.098000000000000004],"name":"Salada","type":"scatter","mode":"lines+markers","line":{"color":"#e7298a","width":2.5},"marker":{"color":"#e7298a","size":8,"line":{"color":"rgba(214,39,40,1)"}},"visible":false,"legendgroup":"Salada","showlegend":false,"hovertemplate":["<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>",null,"<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>"],"error_y":{"color":"rgba(214,39,40,1)"},"error_x":{"color":"rgba(214,39,40,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2025-11-15","2025-12-15","2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15"],"y":[0.049048500000000002,0.05543725,0.0671205,0.052803999999999997,0.10402690000000001,0.17450769999999999,0.047431849999999998],"name":"Chara","type":"scatter","mode":"lines+markers","line":{"color":"#1b9e77","width":2.5},"marker":{"color":"#1b9e77","size":8,"line":{"color":"rgba(148,103,189,1)"}},"visible":false,"legendgroup":"Chara","showlegend":false,"hovertemplate":["<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>"],"error_y":{"color":"rgba(148,103,189,1)"},"error_x":{"color":"rgba(148,103,189,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2025-12-15","2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15"],"y":[0.0016236,0.0010024000000000001,0.0054991500000000004,0.00208245,0.57698375000000002,0.0247642],"name":"Fartet","type":"scatter","mode":"lines+markers","line":{"color":"#d95f02","width":2.5},"marker":{"color":"#d95f02","size":8,"line":{"color":"rgba(140,86,75,1)"}},"visible":false,"legendgroup":"Fartet","showlegend":false,"hovertemplate":["<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>"],"error_y":{"color":"rgba(140,86,75,1)"},"error_x":{"color":"rgba(140,86,75,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2025-11-15","2025-12-15","2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15"],"y":[0.79384785000000002,0.057646799999999998,0.31544814999999998,0.11777145,0.013666899999999999,0.93784484999999995,0.0017788999999999999],"name":"Nueva","type":"scatter","mode":"lines+markers","line":{"color":"#7570b3","width":2.5},"marker":{"color":"#7570b3","size":8,"line":{"color":"rgba(227,119,194,1)"}},"visible":false,"legendgroup":"Nueva","showlegend":false,"hovertemplate":["<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>"],"error_y":{"color":"rgba(227,119,194,1)"},"error_x":{"color":"rgba(227,119,194,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2025-11-15","2025-12-15","2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15"],"y":[0.065623799999999996,0.065122650000000004,0.0020895000000000002,5.56926085,0.061585899999999999,0.67814454999999996,0.76735399999999998],"name":"Salada","type":"scatter","mode":"lines+markers","line":{"color":"#e7298a","width":2.5},"marker":{"color":"#e7298a","size":8,"line":{"color":"rgba(127,127,127,1)"}},"visible":false,"legendgroup":"Salada","showlegend":false,"hovertemplate":["<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>"],"error_y":{"color":"rgba(127,127,127,1)"},"error_x":{"color":"rgba(127,127,127,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2025-11-15","2025-12-15","2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15"],"y":[0.00136962,3.2610000000000001e-05,0.00045654000000000002,0.00045654000000000002,0.00026088000000000001,0.0028696799999999999,0.00075002999999999995],"name":"Chara","type":"scatter","mode":"lines+markers","line":{"color":"#1b9e77","width":2.5},"marker":{"color":"#1b9e77","size":8,"line":{"color":"rgba(188,189,34,1)"}},"visible":false,"legendgroup":"Chara","showlegend":false,"hovertemplate":["<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Chara<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>"],"error_y":{"color":"rgba(188,189,34,1)"},"error_x":{"color":"rgba(188,189,34,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2025-12-15","2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15"],"y":[0.00013044,3.2610000000000001e-05,0.00045654000000000002,0.00013044,0.00110874,0.00097830000000000009],"name":"Fartet","type":"scatter","mode":"lines+markers","line":{"color":"#d95f02","width":2.5},"marker":{"color":"#d95f02","size":8,"line":{"color":"rgba(23,190,207,1)"}},"visible":false,"legendgroup":"Fartet","showlegend":false,"hovertemplate":["<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Fartet<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>"],"error_y":{"color":"rgba(23,190,207,1)"},"error_x":{"color":"rgba(23,190,207,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2025-11-15","2025-12-15","2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15"],"y":[0.00078264000000000003,6.5220000000000002e-05,0,0.00026088000000000001,0.00026088000000000001,0.0051849900000000004,0.00019566000000000001],"name":"Nueva","type":"scatter","mode":"lines+markers","line":{"color":"#7570b3","width":2.5},"marker":{"color":"#7570b3","size":8,"line":{"color":"rgba(31,119,180,1)"}},"visible":false,"legendgroup":"Nueva","showlegend":false,"hovertemplate":["<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Nueva<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>"],"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2025-11-15","2025-12-15","2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15"],"y":[0.0032936100000000002,0.0015326700000000001,0.00068481,0.032120849999999999,0.022174800000000001,0.015098429999999999,0],"name":"Salada","type":"scatter","mode":"lines+markers","line":{"color":"#e7298a","width":2.5},"marker":{"color":"#e7298a","size":8,"line":{"color":"rgba(255,127,14,1)"}},"visible":false,"legendgroup":"Salada","showlegend":false,"hovertemplate":["<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>","<b>Salada<\/b><br>Fecha: %{x}<br>Valor: %{y}<extra><\/extra>"],"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div>
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-title="Registro Completo Fisicoquímico y Biológico" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-header"><div class="card-title"><span style="display: inline">
+Registro Completo Fisicoquímico y Biológico
+</span></div></div>
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<div class="datatables html-widget html-fill-item html-fill-container" id="htmlwidget-506127c0f305d7c208a6" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-506127c0f305d7c208a6">{"x":{"filter":"none","vertical":false,"data":[["Chara","Chara","Chara","Chara","Chara","Chara","Chara","Fartet","Fartet","Fartet","Fartet","Fartet","Fartet","Fartet","Nueva","Nueva","Nueva","Nueva","Nueva","Nueva","Nueva","Salada","Salada","Salada","Salada","Salada","Salada","Salada"],["2025-11-15","2025-12-15","2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15","2025-11-15","2025-12-15","2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15","2025-11-15","2025-12-15","2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15","2025-11-15","2025-12-15","2026-01-15","2026-02-15","2026-03-15","2026-04-15","2026-05-15"],[10.4,12.5,10.7,17.2,17.8,17.1,17.6,null,10.2,9.6,13.07,13.2,17.1,17.7,8.6,11.4,15.7,15.7,14.7,18.7,19,8.699999999999999,11.5,9,13.6,13.9,19.9,20],[45.6,47.4,53.1,50.3,54.3,160.8,82.09999999999999,null,18.5,30.1,48.2,36.9,36.6,75.2,122.4,121.2,124.2,124.2,133,119.3,172.1,90.7,57.5,96.40000000000001,180.7,86.3,80.09999999999999,130.3],[1.13,1.39,1.97,3.14,3.08,5.92,4.82,null,6.83,4.77,5.01,4.86,7.68,6.08,5.82,5.82,4.35,4.35,3.96,7.34,6.92,11.7,11.56,12.78,8.66,8.619999999999999,13.8,10.36],[8.44,8.65,8.19,8.6,9.08,7.5,8.44,null,8.050000000000001,8.210000000000001,8.69,8.85,7.9,8.49,8.699999999999999,8.210000000000001,9.359999999999999,9.359999999999999,9.390000000000001,10.2,8.35,8.640000000000001,7.19,7.98,9.289999999999999,9.09,9.130000000000001,8.51],[null,null,16.035,17.547,8.593,6.38,8.273,null,null,24.163,25.764,11.491,8.81,13.094,null,null,7.399,4.393,2.065,1.29,3.125,null,null,18.285,13.816,13.179,4.38,5.193],[0.007,0.004,0.002,0.157,0,0.0043,0,null,0.004,0.001,0.07199999999999999,0,0.041,0.001,0.002,0.004,0.003,0.057,0.0004,0.001,0.01,0.025,0.007,0.007,1.687,null,0.0095,0.098],[0.0490485,0.05543725,0.0671205,0.052804,0.1040269,0.1745077,0.04743185,null,0.0016236,0.0010024,0.00549915,0.00208245,0.57698375,0.0247642,0.79384785,0.0576468,0.31544815,0.11777145,0.0136669,0.93784485,0.0017789,0.0656238,0.06512265,0.0020895,5.56926085,0.0615859,0.67814455,0.767354],[0.00136962,3.261e-05,0.00045654,0.00045654,0.00026088,0.00286968,0.0007500299999999999,null,0.00013044,3.261e-05,0.00045654,0.00013044,0.00110874,0.0009783000000000001,0.00078264,6.522e-05,0,0.00026088,0.00026088,0.00518499,0.00019566,0.00329361,0.00153267,0.00068481,0.03212085,0.0221748,0.01509843,0],[25,63,33,81,114,307,350,null,907,63,768,651,784,415,497,1129,343,1621,1754,486,349,13,3,1,6,6,37,922],[9,4,6,9,6,11,9,null,15,15,18,17,16,11,16,13,8,15,14,13,14,3,3,1,3,4,7,11]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Laguna<\/th>\n      <th>Fecha<\/th>\n      <th>T (°C)<\/th>\n      <th>OD (%)<\/th>\n      <th>CE (mS/cm)<\/th>\n      <th>pH<\/th>\n      <th>Alcalinidad<\/th>\n      <th>Clorofila (µg/L)<\/th>\n      <th>DIN (mg/L)<\/th>\n      <th>SRP (mg/L)<\/th>\n      <th>Abundancia Total<\/th>\n      <th>Riqueza de Taxa<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"bPaginate":false,"dom":"ftp","language":{"info":"Showing _TOTAL_ entries"},"pageLength":7,"scrollX":true,"order":[[0,"asc"],[1,"asc"]],"columnDefs":[{"className":"dt-right","targets":[2,3,4,5,6,7,8,9,10,11]},{"name":"Laguna","targets":0},{"name":"Fecha","targets":1},{"name":"T (°C)","targets":2},{"name":"OD (%)","targets":3},{"name":"CE (mS/cm)","targets":4},{"name":"pH","targets":5},{"name":"Alcalinidad","targets":6},{"name":"Clorofila (µg/L)","targets":7},{"name":"DIN (mg/L)","targets":8},{"name":"SRP (mg/L)","targets":9},{"name":"Abundancia Total","targets":10},{"name":"Riqueza de Taxa","targets":11}],"autoWidth":false,"orderClasses":false,"lengthMenu":[7,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div>
+</div>
+<div id="tendencia-histórica" class="dashboard-page tab-pane grid-skip html-fill-item html-fill-container" data-orientation="rows" aria-labelledby="tab-tendencia-histórica">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, 65fr) minmax(3em, 35fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-title="Evolución Interanual (2015 - 2023)" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-header"><div class="card-title"><span style="display: inline">
+Evolución Interanual (2015 - 2023)
+</span></div></div>
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<div class="plotly html-widget html-fill-item html-fill-container" id="htmlwidget-80fe8c197bd2356782b2" style="width:100%;height:406px;"></div>
+<script type="application/json" data-for="htmlwidget-80fe8c197bd2356782b2">{"x":{"data":[{"x":[2,3,4,5,6],"y":[6.4000000000000004,8.6500000000000004,7.4500000000000002,7.7000000000000002,3.5249999999999999],"text":["periodo: 2018-19<br />media:   6.40000<br />laguna: Chara<br />laguna: Chara","periodo: 2021-22<br />media:   8.65000<br />laguna: Chara<br />laguna: Chara","periodo: 2022-23<br />media:   7.45000<br />laguna: Chara<br />laguna: Chara","periodo: 2023-24<br />media:   7.70000<br />laguna: Chara<br />laguna: Chara","periodo: 2025-26<br />media:   3.52500<br />laguna: Chara<br />laguna: Chara"],"type":"scatter","mode":"lines+markers","line":{"width":3.0236220472440949,"color":"rgba(228,26,28,1)","dash":"solid"},"hoveron":"points","name":"Chara","legendgroup":"Chara","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(228,26,28,1)","opacity":1,"size":9.4488188976377963,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(228,26,28,1)"}},"frame":null},{"x":[2,5,6],"y":[1.2,18.969999999999999,0.079000000000000001],"text":["periodo: 2018-19<br />media:   1.20000<br />laguna: Chara<br />laguna: Chara","periodo: 2023-24<br />media:  18.97000<br />laguna: Chara<br />laguna: Chara","periodo: 2025-26<br />media:   0.07900<br />laguna: Chara<br />laguna: Chara"],"type":"scatter","mode":"lines+markers","line":{"width":3.0236220472440949,"color":"rgba(228,26,28,1)","dash":"solid"},"hoveron":"points","name":"Chara","legendgroup":"Chara","showlegend":false,"xaxis":"x2","yaxis":"y2","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(228,26,28,1)","opacity":1,"size":9.4488188976377963,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(228,26,28,1)"}},"frame":null},{"x":[2,3,4,5,6],"y":[4.7300000000000004,3.27,2.9500000000000002,0.085000000000000006,0.1085],"text":["periodo: 2018-19<br />media:   4.73000<br />laguna: Chara<br />laguna: Chara","periodo: 2021-22<br />media:   3.27000<br />laguna: Chara<br />laguna: Chara","periodo: 2022-23<br />media:   2.95000<br />laguna: Chara<br />laguna: Chara","periodo: 2023-24<br />media:   0.08500<br />laguna: Chara<br />laguna: Chara","periodo: 2025-26<br />media:   0.10850<br />laguna: Chara<br />laguna: Chara"],"type":"scatter","mode":"lines+markers","line":{"width":3.0236220472440949,"color":"rgba(228,26,28,1)","dash":"solid"},"hoveron":"points","name":"Chara","legendgroup":"Chara","showlegend":false,"xaxis":"x3","yaxis":"y3","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(228,26,28,1)","opacity":1,"size":9.4488188976377963,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(228,26,28,1)"}},"frame":null},{"x":[2,3,4,5,6],"y":[136.40000000000001,150.05000000000001,97.950000000000003,107.5,63.850000000000001],"text":["periodo: 2018-19<br />media: 136.40000<br />laguna: Chara<br />laguna: Chara","periodo: 2021-22<br />media: 150.05000<br />laguna: Chara<br />laguna: Chara","periodo: 2022-23<br />media:  97.95000<br />laguna: Chara<br />laguna: Chara","periodo: 2023-24<br />media: 107.50000<br />laguna: Chara<br />laguna: Chara","periodo: 2025-26<br />media:  63.85000<br />laguna: Chara<br />laguna: Chara"],"type":"scatter","mode":"lines+markers","line":{"width":3.0236220472440949,"color":"rgba(228,26,28,1)","dash":"solid"},"hoveron":"points","name":"Chara","legendgroup":"Chara","showlegend":false,"xaxis":"x","yaxis":"y4","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(228,26,28,1)","opacity":1,"size":9.4488188976377963,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(228,26,28,1)"}},"frame":null},{"x":[2,3,4,5,6],"y":[0.076499999999999999,0.28000000000000003,0.14999999999999999,0.20649999999999999,1.4450000000000001],"text":["periodo: 2018-19<br />media:   0.07650<br />laguna: Chara<br />laguna: Chara","periodo: 2021-22<br />media:   0.28000<br />laguna: Chara<br />laguna: Chara","periodo: 2022-23<br />media:   0.15000<br />laguna: Chara<br />laguna: Chara","periodo: 2023-24<br />media:   0.20650<br />laguna: Chara<br />laguna: Chara","periodo: 2025-26<br />media:   1.44500<br />laguna: Chara<br />laguna: Chara"],"type":"scatter","mode":"lines+markers","line":{"width":3.0236220472440949,"color":"rgba(228,26,28,1)","dash":"solid"},"hoveron":"points","name":"Chara","legendgroup":"Chara","showlegend":false,"xaxis":"x2","yaxis":"y5","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(228,26,28,1)","opacity":1,"size":9.4488188976377963,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(228,26,28,1)"}},"frame":null},{"x":[1,2,3,4,6],"y":[10.865,12.949999999999999,9.5999999999999996,7.9000000000000004,6.25],"text":["periodo: 2015-16<br />media:  10.86500<br />laguna: Fartet<br />laguna: Fartet","periodo: 2018-19<br />media:  12.95000<br />laguna: Fartet<br />laguna: Fartet","periodo: 2021-22<br />media:   9.60000<br />laguna: Fartet<br />laguna: Fartet","periodo: 2022-23<br />media:   7.90000<br />laguna: Fartet<br />laguna: Fartet","periodo: 2025-26<br />media:   6.25000<br />laguna: Fartet<br />laguna: Fartet"],"type":"scatter","mode":"lines+markers","line":{"width":3.0236220472440949,"color":"rgba(55,126,184,1)","dash":"solid"},"hoveron":"points","name":"Fartet","legendgroup":"Fartet","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(55,126,184,1)","opacity":1,"size":9.4488188976377963,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(55,126,184,1)"}},"frame":null},{"x":[1,2,6],"y":[17.199999999999999,0.92500000000000004,0.020549999999999999],"text":["periodo: 2015-16<br />media:  17.20000<br />laguna: Fartet<br />laguna: Fartet","periodo: 2018-19<br />media:   0.92500<br />laguna: Fartet<br />laguna: Fartet","periodo: 2025-26<br />media:   0.02055<br />laguna: Fartet<br />laguna: Fartet"],"type":"scatter","mode":"lines+markers","line":{"width":3.0236220472440949,"color":"rgba(55,126,184,1)","dash":"solid"},"hoveron":"points","name":"Fartet","legendgroup":"Fartet","showlegend":false,"xaxis":"x2","yaxis":"y2","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(55,126,184,1)","opacity":1,"size":9.4488188976377963,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(55,126,184,1)"}},"frame":null},{"x":[1,2,3,4,6],"y":[5.0499999999999998,6.2199999999999998,0.95999999999999996,1.2150000000000001,0.28999999999999998],"text":["periodo: 2015-16<br />media:   5.05000<br />laguna: Fartet<br />laguna: Fartet","periodo: 2018-19<br />media:   6.22000<br />laguna: Fartet<br />laguna: Fartet","periodo: 2021-22<br />media:   0.96000<br />laguna: Fartet<br />laguna: Fartet","periodo: 2022-23<br />media:   1.21500<br />laguna: Fartet<br />laguna: Fartet","periodo: 2025-26<br />media:   0.29000<br />laguna: Fartet<br />laguna: Fartet"],"type":"scatter","mode":"lines+markers","line":{"width":3.0236220472440949,"color":"rgba(55,126,184,1)","dash":"solid"},"hoveron":"points","name":"Fartet","legendgroup":"Fartet","showlegend":false,"xaxis":"x3","yaxis":"y3","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(55,126,184,1)","opacity":1,"size":9.4488188976377963,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(55,126,184,1)"}},"frame":null},{"x":[1,2,3,4,6],"y":[122.84999999999999,75.049999999999997,104.40000000000001,69,46.850000000000001],"text":["periodo: 2015-16<br />media: 122.85000<br />laguna: Fartet<br />laguna: Fartet","periodo: 2018-19<br />media:  75.05000<br />laguna: Fartet<br />laguna: Fartet","periodo: 2021-22<br />media: 104.40000<br />laguna: Fartet<br />laguna: Fartet","periodo: 2022-23<br />media:  69.00000<br />laguna: Fartet<br />laguna: Fartet","periodo: 2025-26<br />media:  46.85000<br />laguna: Fartet<br />laguna: Fartet"],"type":"scatter","mode":"lines+markers","line":{"width":3.0236220472440949,"color":"rgba(55,126,184,1)","dash":"solid"},"hoveron":"points","name":"Fartet","legendgroup":"Fartet","showlegend":false,"xaxis":"x","yaxis":"y4","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(55,126,184,1)","opacity":1,"size":9.4488188976377963,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(55,126,184,1)"}},"frame":null},{"x":[1,2,3,4,6],"y":[0.040000000000000001,0.14000000000000001,0.27500000000000002,0.85999999999999999,0.56499999999999995],"text":["periodo: 2015-16<br />media:   0.04000<br />laguna: Fartet<br />laguna: Fartet","periodo: 2018-19<br />media:   0.14000<br />laguna: Fartet<br />laguna: Fartet","periodo: 2021-22<br />media:   0.27500<br />laguna: Fartet<br />laguna: Fartet","periodo: 2022-23<br />media:   0.86000<br />laguna: Fartet<br />laguna: Fartet","periodo: 2025-26<br />media:   0.56500<br />laguna: Fartet<br />laguna: Fartet"],"type":"scatter","mode":"lines+markers","line":{"width":3.0236220472440949,"color":"rgba(55,126,184,1)","dash":"solid"},"hoveron":"points","name":"Fartet","legendgroup":"Fartet","showlegend":false,"xaxis":"x2","yaxis":"y5","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(55,126,184,1)","opacity":1,"size":9.4488188976377963,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(55,126,184,1)"}},"frame":null},{"x":[6],"y":[5.5999999999999996],"text":"periodo: 2025-26<br />media:   5.60000<br />laguna: Nueva<br />laguna: Nueva","type":"scatter","mode":"lines+markers","line":{"width":3.0236220472440949,"color":"rgba(77,175,74,1)","dash":"solid"},"hoveron":"points","name":"Nueva","legendgroup":"Nueva","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(77,175,74,1)","opacity":1,"size":9.4488188976377963,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(77,175,74,1)"}},"frame":null},{"x":[6],"y":[0.0287],"text":"periodo: 2025-26<br />media:   0.02870<br />laguna: Nueva<br />laguna: Nueva","type":"scatter","mode":"lines+markers","line":{"width":3.0236220472440949,"color":"rgba(77,175,74,1)","dash":"solid"},"hoveron":"points","name":"Nueva","legendgroup":"Nueva","showlegend":false,"xaxis":"x2","yaxis":"y2","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(77,175,74,1)","opacity":1,"size":9.4488188976377963,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(77,175,74,1)"}},"frame":null},{"x":[6],"y":[0.46550000000000002],"text":"periodo: 2025-26<br />media:   0.46550<br />laguna: Nueva<br />laguna: Nueva","type":"scatter","mode":"lines+markers","line":{"width":3.0236220472440949,"color":"rgba(77,175,74,1)","dash":"solid"},"hoveron":"points","name":"Nueva","legendgroup":"Nueva","showlegend":false,"xaxis":"x3","yaxis":"y3","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(77,175,74,1)","opacity":1,"size":9.4488188976377963,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(77,175,74,1)"}},"frame":null},{"x":[6],"y":[145.69999999999999],"text":"periodo: 2025-26<br />media: 145.70000<br />laguna: Nueva<br />laguna: Nueva","type":"scatter","mode":"lines+markers","line":{"width":3.0236220472440949,"color":"rgba(77,175,74,1)","dash":"solid"},"hoveron":"points","name":"Nueva","legendgroup":"Nueva","showlegend":false,"xaxis":"x","yaxis":"y4","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(77,175,74,1)","opacity":1,"size":9.4488188976377963,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(77,175,74,1)"}},"frame":null},{"x":[6],"y":[2.5905],"text":"periodo: 2025-26<br />media:   2.59050<br />laguna: Nueva<br />laguna: Nueva","type":"scatter","mode":"lines+markers","line":{"width":3.0236220472440949,"color":"rgba(77,175,74,1)","dash":"solid"},"hoveron":"points","name":"Nueva","legendgroup":"Nueva","showlegend":false,"xaxis":"x2","yaxis":"y5","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(77,175,74,1)","opacity":1,"size":9.4488188976377963,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(77,175,74,1)"}},"frame":null},{"x":[2,3,4,5,6],"y":[18.065000000000001,24.449999999999999,14.15,29.149999999999999,11.199999999999999],"text":["periodo: 2018-19<br />media:  18.06500<br />laguna: Salada<br />laguna: Salada","periodo: 2021-22<br />media:  24.45000<br />laguna: Salada<br />laguna: Salada","periodo: 2022-23<br />media:  14.15000<br />laguna: Salada<br />laguna: Salada","periodo: 2023-24<br />media:  29.15000<br />laguna: Salada<br />laguna: Salada","periodo: 2025-26<br />media:  11.20000<br />laguna: Salada<br />laguna: Salada"],"type":"scatter","mode":"lines+markers","line":{"width":3.0236220472440949,"color":"rgba(152,78,163,1)","dash":"solid"},"hoveron":"points","name":"Salada","legendgroup":"Salada","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(152,78,163,1)","opacity":1,"size":9.4488188976377963,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(152,78,163,1)"}},"frame":null},{"x":[2,5,6],"y":[1.5549999999999999,61.200000000000003,0.84350000000000003],"text":["periodo: 2018-19<br />media:   1.55500<br />laguna: Salada<br />laguna: Salada","periodo: 2023-24<br />media:  61.20000<br />laguna: Salada<br />laguna: Salada","periodo: 2025-26<br />media:   0.84350<br />laguna: Salada<br />laguna: Salada"],"type":"scatter","mode":"lines+markers","line":{"width":3.0236220472440949,"color":"rgba(152,78,163,1)","dash":"solid"},"hoveron":"points","name":"Salada","legendgroup":"Salada","showlegend":false,"xaxis":"x2","yaxis":"y2","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(152,78,163,1)","opacity":1,"size":9.4488188976377963,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(152,78,163,1)"}},"frame":null},{"x":[2,3,4,5,6],"y":[20.274999999999999,1.7549999999999999,1.4550000000000001,0.66500000000000004,2.7850000000000001],"text":["periodo: 2018-19<br />media:  20.27500<br />laguna: Salada<br />laguna: Salada","periodo: 2021-22<br />media:   1.75500<br />laguna: Salada<br />laguna: Salada","periodo: 2022-23<br />media:   1.45500<br />laguna: Salada<br />laguna: Salada","periodo: 2023-24<br />media:   0.66500<br />laguna: Salada<br />laguna: Salada","periodo: 2025-26<br />media:   2.78500<br />laguna: Salada<br />laguna: Salada"],"type":"scatter","mode":"lines+markers","line":{"width":3.0236220472440949,"color":"rgba(152,78,163,1)","dash":"solid"},"hoveron":"points","name":"Salada","legendgroup":"Salada","showlegend":false,"xaxis":"x3","yaxis":"y3","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(152,78,163,1)","opacity":1,"size":9.4488188976377963,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(152,78,163,1)"}},"frame":null},{"x":[2,3,4,5,6],"y":[104.84999999999999,106.5,88.150000000000006,107.05,119.09999999999999],"text":["periodo: 2018-19<br />media: 104.85000<br />laguna: Salada<br />laguna: Salada","periodo: 2021-22<br />media: 106.50000<br />laguna: Salada<br />laguna: Salada","periodo: 2022-23<br />media:  88.15000<br />laguna: Salada<br />laguna: Salada","periodo: 2023-24<br />media: 107.05000<br />laguna: Salada<br />laguna: Salada","periodo: 2025-26<br />media: 119.10000<br />laguna: Salada<br />laguna: Salada"],"type":"scatter","mode":"lines+markers","line":{"width":3.0236220472440949,"color":"rgba(152,78,163,1)","dash":"solid"},"hoveron":"points","name":"Salada","legendgroup":"Salada","showlegend":false,"xaxis":"x","yaxis":"y4","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(152,78,163,1)","opacity":1,"size":9.4488188976377963,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(152,78,163,1)"}},"frame":null},{"x":[2,3,4,5,6],"y":[0.085000000000000006,0.31,2.8300000000000001,0.435,16.055],"text":["periodo: 2018-19<br />media:   0.08500<br />laguna: Salada<br />laguna: Salada","periodo: 2021-22<br />media:   0.31000<br />laguna: Salada<br />laguna: Salada","periodo: 2022-23<br />media:   2.83000<br />laguna: Salada<br />laguna: Salada","periodo: 2023-24<br />media:   0.43500<br />laguna: Salada<br />laguna: Salada","periodo: 2025-26<br />media:  16.05500<br />laguna: Salada<br />laguna: Salada"],"type":"scatter","mode":"lines+markers","line":{"width":3.0236220472440949,"color":"rgba(152,78,163,1)","dash":"solid"},"hoveron":"points","name":"Salada","legendgroup":"Salada","showlegend":false,"xaxis":"x2","yaxis":"y5","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(152,78,163,1)","opacity":1,"size":9.4488188976377963,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(152,78,163,1)"}},"frame":null}],"layout":{"margin":{"t":34.995433789954348,"r":7.3059360730593621,"b":37.260273972602747,"l":37.260273972602747},"paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"xaxis":{"domain":[0,0.30098934550989342],"automargin":true,"type":"linear","autorange":false,"range":[0.40000000000000002,6.5999999999999996],"tickmode":"array","ticktext":["2015-16","2018-19","2021-22","2022-23","2023-24","2025-26"],"tickvals":[1,2,3,3.9999999999999996,5,6],"categoryorder":"array","categoryarray":["2015-16","2018-19","2021-22","2022-23","2023-24","2025-26"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y4","title":"","hoverformat":".2f"},"annotations":[{"text":"Periodo Hidrológico","x":0.5,"y":0,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"top","annotationType":"axis","yshift":-21.917808219178081},{"text":"Media","x":0,"y":0.5,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"xref":"paper","yref":"paper","textangle":-90,"xanchor":"right","yanchor":"center","annotationType":"axis","xshift":-21.917808219178081},{"text":"CE (mS/cm)","x":0.15049467275494671,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.68949771689498},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"},{"text":"Chla (µg/L)","x":0.5,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.68949771689498},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"},{"text":"DIN (mg/L)","x":0.84950532724505323,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.68949771689498},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"},{"text":"OD (%)","x":0.15049467275494671,"y":0.4604261796042618,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.68949771689498},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"},{"text":"SRP (mg/L)","x":0.5,"y":0.4604261796042618,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.68949771689498},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"}],"yaxis":{"domain":[0.5395738203957382,1],"automargin":true,"type":"linear","autorange":false,"range":[2.2437499999999999,30.431249999999999],"tickmode":"array","ticktext":["10","20","30"],"tickvals":[10,20,30],"categoryorder":"array","categoryarray":["10","20","30"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":"","hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","layer":"below","x0":0,"x1":0.30098934550989342,"y0":0,"y1":23.37899543378996,"yanchor":1,"ysizemode":"pixel"},{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","layer":"below","x0":0.36567732115677321,"x1":0.63432267884322679,"y0":0,"y1":23.37899543378996,"yanchor":1,"ysizemode":"pixel"},{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","layer":"below","x0":0.69901065449010646,"x1":1,"y0":0,"y1":23.37899543378996,"yanchor":1,"ysizemode":"pixel"},{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","layer":"below","x0":0,"x1":0.30098934550989342,"y0":0,"y1":23.37899543378996,"yanchor":0.4604261796042618,"ysizemode":"pixel"},{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","layer":"below","x0":0.36567732115677321,"x1":0.63432267884322679,"y0":0,"y1":23.37899543378996,"yanchor":0.4604261796042618,"ysizemode":"pixel"}],"xaxis2":{"type":"linear","autorange":false,"range":[0.40000000000000002,6.5999999999999996],"tickmode":"array","ticktext":["2015-16","2018-19","2021-22","2022-23","2023-24","2025-26"],"tickvals":[1,2,3,3.9999999999999996,5,6],"categoryorder":"array","categoryarray":["2015-16","2018-19","2021-22","2022-23","2023-24","2025-26"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"domain":[0.36567732115677321,0.63432267884322679],"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y5","title":"","hoverformat":".2f"},"yaxis2":{"type":"linear","autorange":false,"range":[-3.0384225000000002,64.258972499999999],"tickmode":"array","ticktext":["0","20","40","60"],"tickvals":[0,20,40,60],"categoryorder":"array","categoryarray":["0","20","40","60"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"domain":[0.5395738203957382,1],"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x2","title":"","hoverformat":".2f"},"xaxis3":{"type":"linear","autorange":false,"range":[0.40000000000000002,6.5999999999999996],"tickmode":"array","ticktext":["2015-16","2018-19","2021-22","2022-23","2023-24","2025-26"],"tickvals":[1,2,3,3.9999999999999996,5,6],"categoryorder":"array","categoryarray":["2015-16","2018-19","2021-22","2022-23","2023-24","2025-26"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"domain":[0.69901065449010646,1],"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y3","title":"","hoverformat":".2f"},"yaxis3":{"type":"linear","autorange":false,"range":[-0.92449999999999988,21.284499999999998],"tickmode":"array","ticktext":["0","5","10","15","20"],"tickvals":[0,5,10,14.999999999999998,20],"categoryorder":"array","categoryarray":["0","5","10","15","20"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"domain":[0.5395738203957382,1],"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x3","title":"","hoverformat":".2f"},"yaxis4":{"type":"linear","autorange":false,"range":[41.689999999999998,155.21000000000001],"tickmode":"array","ticktext":["50","75","100","125","150"],"tickvals":[50,75,100,125,150],"categoryorder":"array","categoryarray":["50","75","100","125","150"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"domain":[0,0.4604261796042618],"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":"","hoverformat":".2f"},"yaxis5":{"type":"linear","autorange":false,"range":[-0.76075000000000004,16.85575],"tickmode":"array","ticktext":["0","5","10","15"],"tickvals":[0,5,10.000000000000002,14.999999999999998],"categoryorder":"array","categoryarray":["0","5","10","15"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"domain":[0,0.4604261796042618],"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x2","title":"","hoverformat":".2f"},"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"Laguna","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"24fa21590223":{"x":{},"y":{},"colour":{},"type":"scatter"},"24fa5a9b58ef":{"x":{},"y":{},"colour":{}}},"cur_data":"24fa21590223","visdat":{"24fa21590223":["function (y) ","x"],"24fa5a9b58ef":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-title="Resumen Histórico" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-header"><div class="card-title"><span style="display: inline">
+Resumen Histórico
+</span></div></div>
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<div class="datatables html-widget html-fill-item html-fill-container" id="htmlwidget-e15dd33bc8f0349f81f0" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-e15dd33bc8f0349f81f0">{"x":{"filter":"none","vertical":false,"data":[["Chara","Chara","Chara","Chara","Chara","Chara","Chara","Chara","Chara","Chara","Chara","Chara","Chara","Chara","Chara","Chara","Chara","Chara","Chara","Chara","Chara","Chara","Chara","Fartet","Fartet","Fartet","Fartet","Fartet","Fartet","Fartet","Fartet","Fartet","Fartet","Fartet","Fartet","Fartet","Fartet","Fartet","Fartet","Fartet","Fartet","Fartet","Fartet","Fartet","Fartet","Fartet","Nueva","Nueva","Nueva","Nueva","Nueva","Salada","Salada","Salada","Salada","Salada","Salada","Salada","Salada","Salada","Salada","Salada","Salada","Salada","Salada","Salada","Salada","Salada","Salada","Salada","Salada","Salada","Salada","Salada"],["2018-19","2021-22","2022-23","2023-24","2025-26","2018-19","2023-24","2025-26","2018-19","2021-22","2022-23","2023-24","2025-26","2018-19","2021-22","2022-23","2023-24","2025-26","2018-19","2021-22","2022-23","2023-24","2025-26","2015-16","2018-19","2021-22","2022-23","2025-26","2015-16","2018-19","2025-26","2015-16","2018-19","2021-22","2022-23","2025-26","2015-16","2018-19","2021-22","2022-23","2025-26","2015-16","2018-19","2021-22","2022-23","2025-26","2025-26","2025-26","2025-26","2025-26","2025-26","2018-19","2021-22","2022-23","2023-24","2025-26","2018-19","2023-24","2025-26","2018-19","2021-22","2022-23","2023-24","2025-26","2018-19","2021-22","2022-23","2023-24","2025-26","2018-19","2021-22","2022-23","2023-24","2025-26"],["CE (mS/cm)","CE (mS/cm)","CE (mS/cm)","CE (mS/cm)","CE (mS/cm)","Chla (µg/L)","Chla (µg/L)","Chla (µg/L)","DIN (mg/L)","DIN (mg/L)","DIN (mg/L)","DIN (mg/L)","DIN (mg/L)","OD (%)","OD (%)","OD (%)","OD (%)","OD (%)","SRP (mg/L)","SRP (mg/L)","SRP (mg/L)","SRP (mg/L)","SRP (mg/L)","CE (mS/cm)","CE (mS/cm)","CE (mS/cm)","CE (mS/cm)","CE (mS/cm)","Chla (µg/L)","Chla (µg/L)","Chla (µg/L)","DIN (mg/L)","DIN (mg/L)","DIN (mg/L)","DIN (mg/L)","DIN (mg/L)","OD (%)","OD (%)","OD (%)","OD (%)","OD (%)","SRP (mg/L)","SRP (mg/L)","SRP (mg/L)","SRP (mg/L)","SRP (mg/L)","CE (mS/cm)","Chla (µg/L)","DIN (mg/L)","OD (%)","SRP (mg/L)","CE (mS/cm)","CE (mS/cm)","CE (mS/cm)","CE (mS/cm)","CE (mS/cm)","Chla (µg/L)","Chla (µg/L)","Chla (µg/L)","DIN (mg/L)","DIN (mg/L)","DIN (mg/L)","DIN (mg/L)","DIN (mg/L)","OD (%)","OD (%)","OD (%)","OD (%)","OD (%)","SRP (mg/L)","SRP (mg/L)","SRP (mg/L)","SRP (mg/L)","SRP (mg/L)"],[3,7.8,7.1,6.8,1.13,0.05,1.24,0.001,1.48,0.04,0.99,0.01,0.047,100.1,79.8,46.6,62.5,45.6,0.003,0.01,0.01,0.003,0.03,7.77,9.5,8.800000000000001,7.4,4.8,1.7,0.11,0.0001,1.04,3.08,0.11,0.57,0.01,94.2,28,74.5,23.2,18.5,0.01,0.01,0.02,0.01,0.03,3.9,0.0004,0.001,119.3,0.001,4.73,17,13.6,14.2,8.6,0.24,11.8,0.007,3.6,0.27,0.21,0.01,0.01,94,75.8,66.7,64.40000000000001,57.5,0.01,0.04,0.66,0.01,0.01],[9.800000000000001,9.5,7.8,8.6,5.92,2.35,36.7,0.157,7.98,6.5,4.91,0.16,0.17,172.7,220.3,149.3,152.5,82.09999999999999,0.15,0.55,0.29,0.41,2.86,13.96,16.4,10.4,8.4,7.7,32.7,1.74,0.041,9.06,9.359999999999999,1.81,1.86,0.57,151.5,122.1,134.3,114.8,75.2,0.07000000000000001,0.27,0.53,1.71,1.1,7.3,0.057,0.93,172.1,5.18,31.4,31.9,14.7,44.1,13.8,2.87,110.6,1.68,36.95,3.24,2.7,1.32,5.56,115.7,137.2,109.6,149.7,180.7,0.16,0.58,5,0.86,32.1],[6.4,8.65,7.45,7.7,3.525,1.2,18.97,0.079,4.73,3.27,2.95,0.08500000000000001,0.1085,136.4,150.05,97.95,107.5,63.85,0.0765,0.28,0.15,0.2065,1.445,10.865,12.95,9.6,7.9,6.25,17.2,0.925,0.02055,5.05,6.22,0.96,1.215,0.29,122.85,75.05,104.4,69,46.85,0.04,0.14,0.275,0.86,0.5649999999999999,5.6,0.0287,0.4655,145.7,2.5905,18.065,24.45,14.15,29.15,11.2,1.555,61.2,0.8435,20.275,1.755,1.455,0.665,2.785,104.85,106.5,88.15000000000001,107.05,119.1,0.08500000000000001,0.31,2.83,0.435,16.055]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>laguna<\/th>\n      <th>periodo<\/th>\n      <th>parametro<\/th>\n      <th>min<\/th>\n      <th>max<\/th>\n      <th>media<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"bPaginate":false,"dom":"ftp","language":{"info":"Showing _TOTAL_ entries"},"pageLength":6,"columnDefs":[{"className":"dt-right","targets":[3,4,5]},{"name":"laguna","targets":0},{"name":"periodo","targets":1},{"name":"parametro","targets":2},{"name":"min","targets":3},{"name":"max","targets":4},{"name":"media","targets":5}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[6,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div>
+</div>
+<div id="bioindicadores" class="dashboard-page tab-pane grid-skip html-fill-item html-fill-container" data-orientation="rows" aria-labelledby="tab-bioindicadores">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, 50fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr) minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-title="Riqueza Taxonómica" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-header"><div class="card-title"><span style="display: inline">
+Riqueza Taxonómica
+</span></div></div>
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<div class="plotly html-widget html-fill-item html-fill-container" id="htmlwidget-b96c69b602e1f5068ca6" style="width:100%;height:406px;"></div>
+<script type="application/json" data-for="htmlwidget-b96c69b602e1f5068ca6">{"x":{"data":[{"orientation":"v","width":[6.3000000000029104,6.3000000000029104,6.3000000000029104,6.3000000000029104,6.3000000000029104,6.3000000000029104,6.3000000000029104],"base":[0,0,0,0,0,0,0],"x":[20397.550000000003,20427.550000000003,20458.550000000003,20489.550000000003,20517.550000000003,20548.550000000003,20578.550000000003],"y":[9,4,6,9,6,11,9],"text":["fecha: 2025-11-15<br />riqueza_taxa:  9<br />nombre_laguna: Chara","fecha: 2025-12-15<br />riqueza_taxa:  4<br />nombre_laguna: Chara","fecha: 2026-01-15<br />riqueza_taxa:  6<br />nombre_laguna: Chara","fecha: 2026-02-15<br />riqueza_taxa:  9<br />nombre_laguna: Chara","fecha: 2026-03-15<br />riqueza_taxa:  6<br />nombre_laguna: Chara","fecha: 2026-04-15<br />riqueza_taxa: 11<br />nombre_laguna: Chara","fecha: 2026-05-15<br />riqueza_taxa:  9<br />nombre_laguna: Chara"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(27,158,119,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Chara","legendgroup":"Chara","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[6.3000000000029104,6.3000000000029104,6.3000000000029104,6.3000000000029104,6.3000000000029104,6.3000000000029104,6.3000000000029104],"base":[null,0,0,0,0,0,0],"x":[20403.849999999999,20433.849999999999,20464.849999999999,20495.849999999999,20523.849999999999,20554.849999999999,20584.849999999999],"y":[null,15,15,18,17,16,11],"text":["fecha: 2025-11-15<br />riqueza_taxa: NA<br />nombre_laguna: Fartet","fecha: 2025-12-15<br />riqueza_taxa: 15<br />nombre_laguna: Fartet","fecha: 2026-01-15<br />riqueza_taxa: 15<br />nombre_laguna: Fartet","fecha: 2026-02-15<br />riqueza_taxa: 18<br />nombre_laguna: Fartet","fecha: 2026-03-15<br />riqueza_taxa: 17<br />nombre_laguna: Fartet","fecha: 2026-04-15<br />riqueza_taxa: 16<br />nombre_laguna: Fartet","fecha: 2026-05-15<br />riqueza_taxa: 11<br />nombre_laguna: Fartet"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(217,95,2,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Fartet","legendgroup":"Fartet","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[6.3000000000029104,6.3000000000029104,6.3000000000029104,6.3000000000029104,6.3000000000029104,6.3000000000029104,6.3000000000029104],"base":[0,0,0,0,0,0,0],"x":[20410.150000000001,20440.150000000001,20471.150000000001,20502.150000000001,20530.150000000001,20561.150000000001,20591.150000000001],"y":[16,13,8,15,14,13,14],"text":["fecha: 2025-11-15<br />riqueza_taxa: 16<br />nombre_laguna: Nueva","fecha: 2025-12-15<br />riqueza_taxa: 13<br />nombre_laguna: Nueva","fecha: 2026-01-15<br />riqueza_taxa:  8<br />nombre_laguna: Nueva","fecha: 2026-02-15<br />riqueza_taxa: 15<br />nombre_laguna: Nueva","fecha: 2026-03-15<br />riqueza_taxa: 14<br />nombre_laguna: Nueva","fecha: 2026-04-15<br />riqueza_taxa: 13<br />nombre_laguna: Nueva","fecha: 2026-05-15<br />riqueza_taxa: 14<br />nombre_laguna: Nueva"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(117,112,179,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Nueva","legendgroup":"Nueva","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[6.3000000000029104,6.3000000000029104,6.3000000000029104,6.3000000000029104,6.3000000000029104,6.3000000000029104,6.3000000000029104],"base":[0,0,0,0,0,0,0],"x":[20416.449999999997,20446.449999999997,20477.449999999997,20508.449999999997,20536.449999999997,20567.449999999997,20597.449999999997],"y":[3,3,1,3,4,7,11],"text":["fecha: 2025-11-15<br />riqueza_taxa:  3<br />nombre_laguna: Salada","fecha: 2025-12-15<br />riqueza_taxa:  3<br />nombre_laguna: Salada","fecha: 2026-01-15<br />riqueza_taxa:  1<br />nombre_laguna: Salada","fecha: 2026-02-15<br />riqueza_taxa:  3<br />nombre_laguna: Salada","fecha: 2026-03-15<br />riqueza_taxa:  4<br />nombre_laguna: Salada","fecha: 2026-04-15<br />riqueza_taxa:  7<br />nombre_laguna: Salada","fecha: 2026-05-15<br />riqueza_taxa: 11<br />nombre_laguna: Salada"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(231,41,138,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Salada","legendgroup":"Salada","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":23.305936073059364,"r":7.3059360730593621,"b":37.260273972602747,"l":37.260273972602747},"paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[20384.09,20610.91],"tickmode":"array","ticktext":["Jan","Apr"],"tickvals":[20454,20544],"categoryorder":"array","categoryarray":["Jan","Apr"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":"Fecha","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-0.90000000000000002,18.899999999999999],"tickmode":"array","ticktext":["0","5","10","15"],"tickvals":[0,5.0000000000000009,10,15],"categoryorder":"array","categoryarray":["0","5","10","15"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"Riqueza (Nº Taxones)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"Laguna","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"24fa7955d301":{"x":{},"y":{},"fill":{},"type":"bar"}},"cur_data":"24fa7955d301","visdat":{"24fa7955d301":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div><div class="card cell html-fill-item html-fill-container bslib-card" data-title="Abundancia Total de Macroinvertebrados" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-header"><div class="card-title"><span style="display: inline">
+Abundancia Total de Macroinvertebrados
+</span></div></div>
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<div class="plotly html-widget html-fill-item html-fill-container" id="htmlwidget-bc015a8100be35744c65" style="width:100%;height:406px;"></div>
+<script type="application/json" data-for="htmlwidget-bc015a8100be35744c65">{"x":{"data":[{"x":[20407,20437,20468,20499,20527,20558,20588],"y":[25,63,33,81,114,307,350],"text":["fecha: 2025-11-15<br />abundancia_total:   25<br />nombre_laguna: Chara","fecha: 2025-12-15<br />abundancia_total:   63<br />nombre_laguna: Chara","fecha: 2026-01-15<br />abundancia_total:   33<br />nombre_laguna: Chara","fecha: 2026-02-15<br />abundancia_total:   81<br />nombre_laguna: Chara","fecha: 2026-03-15<br />abundancia_total:  114<br />nombre_laguna: Chara","fecha: 2026-04-15<br />abundancia_total:  307<br />nombre_laguna: Chara","fecha: 2026-05-15<br />abundancia_total:  350<br />nombre_laguna: Chara"],"type":"scatter","mode":"lines+markers","line":{"width":3.4015748031496069,"color":"rgba(27,158,119,1)","dash":"solid"},"hoveron":"points","name":"Chara","legendgroup":"Chara","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(27,158,119,1)","opacity":1,"size":9.4488188976377963,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(27,158,119,1)"}},"frame":null},{"x":[20407,20437,20468,20499,20527,20558,20588],"y":[null,907,63,768,651,784,415],"text":["fecha: 2025-11-15<br />abundancia_total:   NA<br />nombre_laguna: Fartet","fecha: 2025-12-15<br />abundancia_total:  907<br />nombre_laguna: Fartet","fecha: 2026-01-15<br />abundancia_total:   63<br />nombre_laguna: Fartet","fecha: 2026-02-15<br />abundancia_total:  768<br />nombre_laguna: Fartet","fecha: 2026-03-15<br />abundancia_total:  651<br />nombre_laguna: Fartet","fecha: 2026-04-15<br />abundancia_total:  784<br />nombre_laguna: Fartet","fecha: 2026-05-15<br />abundancia_total:  415<br />nombre_laguna: Fartet"],"type":"scatter","mode":"lines+markers","line":{"width":3.4015748031496069,"color":"rgba(217,95,2,1)","dash":"solid"},"hoveron":"points","name":"Fartet","legendgroup":"Fartet","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(217,95,2,1)","opacity":1,"size":9.4488188976377963,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(217,95,2,1)"}},"frame":null},{"x":[20407,20437,20468,20499,20527,20558,20588],"y":[497,1129,343,1621,1754,486,349],"text":["fecha: 2025-11-15<br />abundancia_total:  497<br />nombre_laguna: Nueva","fecha: 2025-12-15<br />abundancia_total: 1129<br />nombre_laguna: Nueva","fecha: 2026-01-15<br />abundancia_total:  343<br />nombre_laguna: Nueva","fecha: 2026-02-15<br />abundancia_total: 1621<br />nombre_laguna: Nueva","fecha: 2026-03-15<br />abundancia_total: 1754<br />nombre_laguna: Nueva","fecha: 2026-04-15<br />abundancia_total:  486<br />nombre_laguna: Nueva","fecha: 2026-05-15<br />abundancia_total:  349<br />nombre_laguna: Nueva"],"type":"scatter","mode":"lines+markers","line":{"width":3.4015748031496069,"color":"rgba(117,112,179,1)","dash":"solid"},"hoveron":"points","name":"Nueva","legendgroup":"Nueva","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(117,112,179,1)","opacity":1,"size":9.4488188976377963,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(117,112,179,1)"}},"frame":null},{"x":[20407,20437,20468,20499,20527,20558,20588],"y":[13,3,1,6,6,37,922],"text":["fecha: 2025-11-15<br />abundancia_total:   13<br />nombre_laguna: Salada","fecha: 2025-12-15<br />abundancia_total:    3<br />nombre_laguna: Salada","fecha: 2026-01-15<br />abundancia_total:    1<br />nombre_laguna: Salada","fecha: 2026-02-15<br />abundancia_total:    6<br />nombre_laguna: Salada","fecha: 2026-03-15<br />abundancia_total:    6<br />nombre_laguna: Salada","fecha: 2026-04-15<br />abundancia_total:   37<br />nombre_laguna: Salada","fecha: 2026-05-15<br />abundancia_total:  922<br />nombre_laguna: Salada"],"type":"scatter","mode":"lines+markers","line":{"width":3.4015748031496069,"color":"rgba(231,41,138,1)","dash":"solid"},"hoveron":"points","name":"Salada","legendgroup":"Salada","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(231,41,138,1)","opacity":1,"size":9.4488188976377963,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(231,41,138,1)"}},"frame":null}],"layout":{"margin":{"t":23.305936073059364,"r":7.3059360730593621,"b":37.260273972602747,"l":48.949771689497723},"paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[20397.950000000001,20597.049999999999],"tickmode":"array","ticktext":["Dec","Jan","Feb","Mar","Apr","May"],"tickvals":[20423,20454,20485,20513,20544,20574],"categoryorder":"array","categoryarray":["Dec","Jan","Feb","Mar","Apr","May"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":"Fecha","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-86.650000000000006,1841.6500000000001],"tickmode":"array","ticktext":["0","500","1000","1500"],"tickvals":[0,500,1000.0000000000001,1500],"categoryorder":"array","categoryarray":["0","500","1000","1500"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"Abundancia Total","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"Laguna","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"24fa952f85a":{"x":{},"y":{},"colour":{},"type":"scatter"},"24fa262ee17e":{"x":{},"y":{},"colour":{}}},"cur_data":"24fa952f85a","visdat":{"24fa952f85a":["function (y) ","x"],"24fa262ee17e":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div><div id="3ade8a4a-fb1d-4a6c-8409-ac45482d5fc9" class="hidden html-fill-item html-fill-container">
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /container fluid -->
+
+<script type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (_event) {
+  if (window.bslib.Card) {
+    window.bslib.Card.initializeAllCards();
+  }
+}); 
+</script>
+  
+
+
+
+</body></html>

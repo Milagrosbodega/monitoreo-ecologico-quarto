@@ -1,0 +1,272 @@
+---
+title: "Monitoreo Ecológico y Calidad de Agua en Lagunas"
+author: "Milagros Bodega"
+format: 
+  dashboard:
+    orientation: rows
+    theme: cosmo
+    nav-buttons: [github]
+    github: https://github.com/Milagrosbodega/monitoreo-ecologico-quarto
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r setup}
+library(tidyverse)
+library(leaflet)
+library(plotly)
+library(DT)
+library(bslib)
+library(bsicons)
+
+datos_mes <- readRDS("data/processed/dataset_consolidado.rds")
+macro_data <- readRDS("data/processed/macroinvertebrados_clean.rds")
+interanual <- readRDS("data/processed/interanual_clean.rds")
+```
+
+# Monitoreo Mensual
+
+## Row {height="20%"}
+
+```{r}
+#| content: valuebox
+#| title: "Lagunas Monitoreadas"
+list(
+  icon = "water",
+  color = "primary",
+  value = n_distinct(datos_mes$nombre_laguna)
+)
+```
+
+```{r}
+#| content: valuebox
+#| title: "Campañas de Muestreo"
+list(
+  icon = "calendar2-check",
+  color = "info",
+  value = n_distinct(datos_mes$fecha)
+)
+```
+
+```{r}
+#| content: valuebox
+#| title: "Total Macroinvertebrados"
+list(
+  icon = "bug",
+  color = "success",
+  value = sum(datos_mes$abundancia_total, na.rm = TRUE)
+)
+```
+
+## Row {height="50%"}
+
+### Column {width="40%"}
+
+```{r}
+#| title: "Ubicación de Lagunas (Les Madrigueres)"
+leaflet(datos_mes %>% distinct(nombre_laguna, latitud, longitud)) %>%
+  # Capa satelital de alta resolución (gratuita y sin clave de API)
+  addProviderTiles(providers$Esri.WorldImagery) %>%
+  addProviderTiles(providers$CartoDB.PositronOnlyLabels) %>%
+  addCircleMarkers(
+    lng = ~longitud, lat = ~latitud,
+    popup = ~paste0("<b>", nombre_laguna, "</b>"),
+    radius = 9,
+    color = "#ffffff",
+    fillColor = "#e7298a",
+    fillOpacity = 0.9,
+    weight = 2
+  )
+```
+
+### Column {width="60%"}
+
+```{r}
+#| title: "Evolución Temporal de Parámetros Fisicoquímicos"
+
+# 1. Definir cómo quieres nombrar cada variable en el gráfico y menús
+# (Modifica el texto entre comillas a tu gusto)
+diccionario_nombres <- c(
+  "t"                = "Temperatura del Agua (°C)",
+  "od_percent"       = "Oxígeno Disuelto (%)",
+  "ce_m_s_cm"        = "Conductividad Eléctrica (mS/cm)",
+  "p_h"              = "pH",
+  "alcalinidad_meq_l"   = "Alcalinidad (meq/L)",
+  "clorofila_microg_l"  = "Clorofila-a (µg/L)",
+  "din_mg_l"       = "DIN (mg/L)",
+  "p_po4_mg_l"          = "SRP (mg/L)"
+)
+
+# Filtrar solo las columnas que existan en tu dataset consolidado
+vars_disponibles <- intersect(names(diccionario_nombres), names(datos_mes))
+colores_lagunas <- c("Chara" = "#1b9e77", "Fartet" = "#d95f02", "Nueva" = "#7570b3", "Salada" = "#e7298a")
+
+# 2. Construir el gráfico Plotly con selector interactivo
+p_interactivo <- plot_ly()
+
+# Crear las trazas para cada variable y cada laguna
+# Por defecto se muestra la primera variable (Temperatura)
+for (i in seq_along(vars_disponibles)) {
+  var_actual <- vars_disponibles[i]
+  es_visible <- (i == 1) # Solo la primera variable arranca visible
+  
+  for (lag in unique(datos_mes$nombre_laguna)) {
+    sub_df <- datos_mes %>% 
+      filter(nombre_laguna == lag) %>% 
+      arrange(fecha)
+    
+    p_interactivo <- p_interactivo %>%
+      add_trace(
+        data = sub_df,
+        x = ~fecha,
+        y = as.formula(paste0("~`", var_actual, "`")),
+        name = lag,
+        type = "scatter",
+        mode = "lines+markers",
+        line = list(color = colores_lagunas[lag], width = 2.5),
+        marker = list(color = colores_lagunas[lag], size = 8),
+        visible = es_visible,
+        legendgroup = lag,
+        showlegend = (i == 1), # Evita duplicar la leyenda en la barra lateral
+        hovertemplate = paste0("<b>", lag, "</b><br>Fecha: %{x}<br>Valor: %{y}<extra></extra>")
+      )
+  }
+}
+
+# 3. Crear los botones del menú desplegable (Dropdown)
+num_lagunas <- length(unique(datos_mes$nombre_laguna))
+botones <- lapply(seq_along(vars_disponibles), function(i) {
+  # Vector lógico de visibilidad para activar solo las trazas de la variable seleccionada
+  vis <- rep(FALSE, length(vars_disponibles) * num_lagunas)
+  idx_inicio <- (i - 1) * num_lagunas + 1
+  idx_fin <- i * num_lagunas
+  vis[idx_inicio:idx_fin] <- TRUE
+  
+  list(
+    method = "update",
+    args = list(
+      list(visible = vis),
+      list(yaxis = list(title = diccionario_nombres[vars_disponibles[i]]))
+    ),
+    label = diccionario_nombres[vars_disponibles[i]]
+  )
+})
+
+# 4. Configurar el diseño y el menú desplegable en la esquina superior
+p_interactivo <- p_interactivo %>%
+  layout(
+    xaxis = list(
+      title = "Mes de Muestreo",
+      tickvals = sort(unique(datos_mes$fecha)),
+      tickformat = "%b %Y"
+    ),
+    yaxis = list(title = diccionario_nombres[vars_disponibles[1]]),
+    updatemenus = list(
+      list(
+        y = 1.15,
+        x = 0.0,
+        xanchor = "left",
+        yanchor = "top",
+        buttons = botones,
+        direction = "down",
+        showactive = TRUE
+      )
+    ),
+    hovermode = "closest",
+    legend = list(orientation = "h", x = 0.2, y = -0.2)
+  )
+
+p_interactivo
+```
+
+## Row {height="30%"}
+
+```{r}
+#| title: "Registro Completo Fisicoquímico y Biológico"
+
+tabla_completa <- datos_mes %>%
+  arrange(nombre_laguna, fecha) %>%
+  # Renombra aquí las columnas exactamente como prefieras verlas en el encabezado
+  select(
+    Laguna              = nombre_laguna,
+    Fecha               = fecha,
+    `T (°C)`            = t,
+    `OD (%)`            = od_percent,
+    `CE (mS/cm)`        = ce_m_s_cm,
+    pH                  = p_h,
+    `Alcalinidad`       = alcalinidad_meq_l,
+    `Clorofila (µg/L)`  = clorofila_microg_l,
+    `DIN (mg/L)`      = din_mg_l,
+    `SRP (mg/L)`      = p_po4_mg_l,
+    `Abundancia Total`  = abundancia_total,
+    `Riqueza de Taxa`   = riqueza_taxa
+  )
+
+datatable(
+  tabla_completa,
+  options = list(
+    pageLength = 7,
+    dom = "ftp",
+    scrollX = TRUE, # Permite deslizar horizontalmente si hay muchas columnas
+    order = list(list(0, 'asc'), list(1, 'asc')) # Ordena agrupado por Laguna y luego por Fecha
+  ),
+  rownames = FALSE
+)
+```
+
+# Tendencia Histórica
+
+## Row {height="65%"}
+
+```{r}
+#| title: "Evolución Interanual (2015 - 2023)"
+p_hist <- ggplot(interanual, aes(x = periodo, y = media, color = laguna, group = laguna)) +
+  geom_line(linewidth = 0.8) +
+  geom_point(size = 2.5) +
+  facet_wrap(~parametro, scales = "free_y") +
+  labs(x = "Periodo Hidrológico", y = "Media", color = "Laguna") +
+  theme_minimal(base_size = 11) +
+  scale_color_brewer(palette = "Set1")
+
+ggplotly(p_hist)
+```
+
+## Row {height="35%"}
+
+```{r}
+#| title: "Resumen Histórico"
+datatable(
+  interanual %>% select(laguna, periodo, parametro, min, max, media),
+  options = list(pageLength = 6, dom = "ftp"),
+  rownames = FALSE
+)
+```
+
+# Bioindicadores
+
+## Row {height="50%"}
+
+```{r}
+#| title: "Riqueza Taxonómica"
+p_taxa <- ggplot(datos_mes, aes(x = fecha, y = riqueza_taxa, fill = nombre_laguna)) +
+  geom_col(position = "dodge") +
+  labs(x = "Fecha", y = "Riqueza (Nº Taxones)", fill = "Laguna") +
+  theme_minimal(base_size = 11) +
+  scale_fill_brewer(palette = "Dark2")
+
+ggplotly(p_taxa)
+```
+
+```{r}
+#| title: "Abundancia Total de Macroinvertebrados"
+p_abund <- ggplot(datos_mes, aes(x = fecha, y = abundancia_total, color = nombre_laguna)) +
+  geom_line(linewidth = 0.9) +
+  geom_point(size = 2.5) +
+  labs(x = "Fecha", y = "Abundancia Total", color = "Laguna") +
+  theme_minimal(base_size = 11) +
+  scale_color_brewer(palette = "Dark2")
+
+ggplotly(p_abund)
+```
