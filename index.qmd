@@ -249,24 +249,121 @@ datatable(
 ## Row {height="50%"}
 
 ```{r}
-#| title: "Riqueza Taxonómica"
-p_taxa <- ggplot(datos_mes, aes(x = fecha, y = riqueza_taxa, fill = nombre_laguna)) +
-  geom_col(position = "dodge") +
-  labs(x = "Fecha", y = "Riqueza (Nº Taxones)", fill = "Laguna") +
-  theme_minimal(base_size = 11) +
-  scale_fill_brewer(palette = "Dark2")
+#Gráfico dual Abundancia (Barras) + Riqueza (Línea)
+lagunas <- unique(datos_mes$nombre_laguna)
+colores_hex <- c("Chara" = "#1b9e77", "Fartet" = "#d95f02", "Nueva" = "#7570b3", "Salada" = "#e7298a")
 
-ggplotly(p_taxa)
+p_dual <- plot_ly()
+
+for (i in seq_along(lagunas)) {
+  lag <- lagunas[i]
+  df_lag <- datos_mes %>% filter(nombre_laguna == lag) %>% arrange(fecha)
+  es_vis <- (i == 1)
+  
+  # Barra de Abundancia (Eje Y izquierdo)
+  p_dual <- p_dual %>%
+    add_bars(
+      data = df_lag, x = ~fecha, y = ~abundancia_total,
+      name = paste(lag, "- Abundancia"),
+      marker = list(color = colores_hex[lag], opacity = 0.55),
+      visible = es_vis,
+      yaxis = "y"
+    ) %>%
+    # Línea de Riqueza (Eje Y derecho)
+    add_trace(
+      data = df_lag, x = ~fecha, y = ~riqueza_taxa,
+      name = paste(lag, "- Riqueza"),
+      type = "scatter", mode = "lines+markers",
+      line = list(color = "#2c3e50", width = 3),
+      marker = list(size = 8, color = "#2c3e50"),
+      visible = es_vis,
+      yaxis = "y2"
+    )
+}
+
+# Botones de selección de laguna
+botones_lag <- lapply(seq_along(lagunas), function(i) {
+  vis <- rep(FALSE, length(lagunas) * 2)
+  vis[((i - 1) * 2 + 1):(i * 2)] <- TRUE
+  list(
+    method = "update",
+    args = list(list(visible = vis)),
+    label = paste("Laguna:", lagunas[i])
+  )
+})
+
+p_dual <- p_dual %>%
+  layout(
+    xaxis = list(title = "Mes de Muestreo", tickvals = sort(unique(datos_mes$fecha)), tickformat = "%b %Y"),
+    yaxis = list(title = "Abundancia Total (Individuos)"),
+    yaxis2 = list(title = "Riqueza (Nº Taxones)", overlaying = "y", side = "right", showgrid = FALSE),
+    updatemenus = list(list(y = 1.18, x = 0, buttons = botones_lag, direction = "down", showactive = TRUE)),
+    legend = list(orientation = "h", x = 0.2, y = -0.2)
+  )
+
+p_dual
 ```
 
-```{r}
-#| title: "Abundancia Total de Macroinvertebrados"
-p_abund <- ggplot(datos_mes, aes(x = fecha, y = abundancia_total, color = nombre_laguna)) +
-  geom_line(linewidth = 0.9) +
-  geom_point(size = 2.5) +
-  labs(x = "Fecha", y = "Abundancia Total", color = "Laguna") +
-  theme_minimal(base_size = 11) +
-  scale_color_brewer(palette = "Dark2")
+## Row {height="50%"}
 
-ggplotly(p_abund)
+```{r}
+#| title: "Perfil de Biodiversidad (Números de Hill por Laguna)"
+
+# 1. Identificar columnas de taxones en la tabla cruda de macroinvertebrados
+cols_meta <- c("fecha", "codigo_laguna", "nombre_laguna", "mes_str", "anio")
+taxa_cols <- setdiff(names(macro_data), cols_meta)
+
+# 2. Calcular los números de Hill acumulados por laguna (q = 0, q = 1, q = 2)
+hill_data <- macro_data %>%
+  group_by(nombre_laguna) %>%
+  summarise(across(all_of(taxa_cols), ~ sum(.x, na.rm = TRUE)), .groups = "drop") %>%
+  pivot_longer(cols = -nombre_laguna, names_to = "taxa", values_to = "conteo") %>%
+  filter(conteo > 0) %>%
+  group_by(nombre_laguna) %>%
+  summarise(
+    # q = 0: Riqueza total observada
+    q0 = n_distinct(taxa),
+    # q = 1: Exponencial de Shannon (número efectivo de especies comunes)
+    q1 = {
+      p <- conteo / sum(conteo)
+      exp(-sum(p * log(p)))
+    },
+    # q = 2: Inverso de Simpson (número efectivo de especies dominantes)
+    q2 = {
+      p <- conteo / sum(conteo)
+      1 / sum(p^2)
+    },
+    .groups = "drop"
+  ) %>%
+  pivot_longer(cols = c(q0, q1, q2), names_to = "orden_q", values_to = "hill_number") %>%
+  mutate(
+    q_valor = case_when(
+      orden_q == "q0" ~ 0,
+      orden_q == "q1" ~ 1,
+      orden_q == "q2" ~ 2
+    ),
+    orden_label = factor(
+      orden_q, 
+      levels = c("q0", "q1", "q2"), 
+      labels = c("q = 0 (Riqueza)", "q = 1 (Shannon exp)", "q = 2 (Simpson inv)")
+    )
+  )
+
+# 3. Graficar el perfil de números de Hill
+p_hill <- ggplot(hill_data, aes(x = q_valor, y = hill_number, color = nombre_laguna, group = nombre_laguna)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 3) +
+  scale_x_continuous(
+    breaks = c(0, 1, 2),
+    labels = c("q0 (Riqueza)", "q1 (Shannon)", "q2 (Simpson)")
+  ) +
+  scale_color_brewer(palette = "Dark2") +
+  labs(
+    x = "Orden de Diversidad (q)",
+    y = "Número Efectivo de Taxones",
+    color = "Laguna"
+  ) +
+  theme_minimal(base_size = 11)
+
+ggplotly(p_hill)
 ```
